@@ -1,0 +1,12 @@
+<h3> This Post Has <%= pluralize(@comments.count, "Comment") %> </h3>
+
+<% @comments.each do |comment| %>
+<p><b><%= comment.user.name %></b></p>
+<p><%= comment.content %><span>  <%= comment.created_at %></span></p>
+<% if current_user == comment.user %>
+<%= link_to "Delete Comment", [comment.lecture, comment], method: :delete %>
+<%= link_to "Edit Comment", edit_lecture_comment_path(comment.lecture, comment) %>
+<% end %>
+<% end %>
+
+<%= render 'comments/form' %>
